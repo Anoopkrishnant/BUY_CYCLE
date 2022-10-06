@@ -1,0 +1,108 @@
+<div class="container text-center">
+  <div class="row row-cols md-6 d-flex">
+    <div class="col ">
+      <div class="btn d-flex justify-content-end">
+        <input type="submit" role="button" class="btn-check" id="btn-check-outlined" href="/admin/category-management" >
+        <a href="/admin/category-management" class="btn btn-outline-primary" type="submit" >Add Category</a><br>
+      </div>
+      <div>
+        <table id="example" class="table table" style="width:100%">
+          <thead>
+            <tr>
+              <th>NO</th>
+              <th>Category Name</th>
+         
+              <th>Change Status</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {{#each category}}
+            <tr>
+              <td>{{Inc1 @index}}</td>
+              <td>{{this.categoryname}}</td>
+              
+
+              <td>
+
+                <a type="submit" class="btn btn-info " style="hight: 8px; width: 8px; " data-bs-toggle="modal"
+                  data-bs-target="#staticBackdrop{{this._id}}" href="update-category"><span><i
+                      class="bi bi-pencil-fill d-flex justify-content-center "></i></span></i></a>
+                <a type="submit" class="btn btn-danger" style="hight: 8px; width: 8px; " data-bs-toggle="modal"
+                  data-bs-target="#staticDelete{{this._id}}"><span><i
+                      class="bi bi-archive-fill d-flex justify-content-center"></i></span></a </tr>
+
+
+
+
+                <!--Edit Modal -->
+                <div class="modal fade" id="staticBackdrop{{this._id}}" data-bs-backdrop="static"
+                  data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabell">Edit Category</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div>
+                        <div class="modal-body">
+                          <form class="row g-3" method="post" action="/admin/update-category/{{this._id}}">
+                            <div class="col-md-6 ">
+
+                              <div class="mt-5">
+                                <input type="text" value="{{this.categoryname}}" class="form-control"
+                                  name="categoryname" id="categoryname">
+                              </div>
+                            </div>
+                        </div>
+
+                        {{#if categoryexist}}
+                        <p>Category already exist</p>
+                        {{/if}}
+
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-danger">Update</button>
+                      </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+
+                <!--Delete Modal -->
+                <div class="modal fade" id="staticDelete{{this._id}}" data-bs-backdrop="static" data-bs-keyboard="false"
+                  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Delete Category</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Are You sure you Want To Delete This Category
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        <a type="button" class="btn btn-danger" href="/admin/delete-category/{{this._id}}">Delete</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {{/each}}
+
+          </tbody>
+
+        </table>
+
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>

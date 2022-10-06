@@ -1,0 +1,279 @@
+  {{#if cartempty}}
+
+
+
+<style>
+ 
+
+ 
+
+
+  .card {
+    
+    border: 0;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    letter-spacing: .5px;
+    border-radius:20px;
+    -webkit-box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
+    box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
+  }
+
+  .card .card-header {
+    background-color: #fff;
+    border-bottom: none;
+    padding: 24px;
+    border-bottom: 1px solid #f6f7fb;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  .card-header:first-child {
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+  }
+
+  .card .card-body {
+    padding: 30px;
+    background-color: transparent;
+    
+
+  }
+
+  .btn-primary,
+  .btn-primary.disabled,
+  .btn-primary:disabled {
+    background-color: #4466f2 !important;
+    border-color: #4466f2 !important;
+  }
+</style>
+
+
+<div class="container-fluid  mt-100 vh-100">
+  <div class="row">
+
+    <div class="col-md-12">
+
+      <div class="card">
+        <div class="card-header">
+          {{!-- <h5>Cart</h5> --}}
+        </div>
+        <div class="card-body cart">
+          <div class="col-sm-12 empty-cart-cls text-center">
+            <img src="https://cdni.iconscout.com/illustration/free/thumb/empty-cart-4085814-3385483.png" width="300" height="300" class="img-fluid mr-3">
+            <h3 class="text-warning">Your Cart Is Empty</h3>
+            {{!-- <h4>Add something to make me happy :)</h4> --}}
+            <a href="/" class="btn btn-outline-primary cart-btn-transform me-3" data-abc="true">Get Somthing !</a>
+
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+</div>
+{{else}}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-custom table-lg mb-0" id="shopping-cart">
+              {{!-- <thead>
+                <tr>
+                  <th>Photo</th>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>Action</th>
+                </tr>
+              </thead> --}}
+           
+
+
+              <tbody>
+                {{#each cartItems}}
+                {{#each this.cartItems}}
+                <tr>
+                  <td>
+                    <a href="">
+                      <img src="/productimages/{{product.image.[0]}}" class="rounded" width="150" alt="...">
+                    </a>
+                  </td>
+                  <td>{{product.productname}}</td>
+                  <td width="100">
+                    <div class="d-flex">
+
+                      {{#if (gt this.quantity 0)}}
+                      <button
+                        class="btn  btn-danger num-down d-flex justify-content-center align-items-center mt-1 me-1 "
+                        style="height: 15px; " onclick="Decqty('{{this.product._id}}')">-</button>
+                      {{/if}}
+                      <input type="text" id="{{this.product._id}}" class="form-control num" name="quantity"
+                        value="{{this.quantity}}">
+                      <button class="btn  btn-danger num-up d-flex justify-content-center align-items-center mt-1 ms-1 "
+                        style="height: 15px;  " onclick="Incqty('{{this.product._id}}')">+</button>
+
+
+
+                    </div>
+                  </td>
+                  <td>₹{{product.price}}</td>
+                  {{!-- <td>{{this.price}}</td> --}}
+                  <td class="text-end">
+                    <a type="submit" href="/delete-cart/{{this.product._id}}" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      <span class="remove "><b style="font-size: 20px;"><i class="bi bi-trash"></i></b></span>
+                    </a>
+                    <!-- Button trigger modal -->
+                    {{!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                      <span class="remove "><b style="font-size: 20px;"><i class="bi bi-trash"></i></b></span>
+                    </button> --}}
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                      aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="font-weight-semi-bold mb-2">Remove From Cart</h4>
+                            {{!-- <h5 class="modal-title" id="exampleModalLabel"> Remove From Cart </h5> --}}
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body d-flex justify-content-center font-weight-semi-bold ">
+                          Are You Sure You Want To Remove This Item From Cart
+                          </div>
+                          <div class="modal-footer">
+                            <a type="submit" class="btn btn-danger" href="/delete-cart/{{this.product._id}}" >Remove</a>
+                            <button onclick="addToWishlist('{{this._id}}')" type="button" class="btn btn-info">Move To Wishlist</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </td>
+                </tr>
+                {{/each}}
+                {{/each}}
+              </tbody>
+            
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="input-group mb-3">
+          </div>
+          <h6 class="card-title mb-4">Cart Summary</h6>
+          <div class="row justify-content-center mb-3">
+            <div class="col-4 text-end">Sub Total :</div>
+            <div class="col-4"> ₹{{totalAmount}}</div>
+          </div>
+          <div class="row justify-content-center mb-3">
+            <div class="col-4 text-end">Shipping :</div>
+            <div class="col-4">Free</div>
+          </div>
+          <div class="row justify-content-center mb-3">
+            <div class="col-4 text-end">Tax(18%) :</div>
+            <div class="col-4">Free</div>
+          </div>
+          
+          <div class="row justify-content-center">
+            <div class="col-4 text-end">
+              <strong>Total :</strong>
+            </div>
+            <div class="col-4">
+              <strong>₹ {{totalAmount}}</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card mb-4">
+        <div class="card-body">
+          {{!-- <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Coupon Code" aria-label="Recipient's username"
+              aria-describedby="basic-addon2">
+            <button class="btn btn-light" type="button" id="button-addon1" onclick="applyCoupon()">Apply</button>
+          </div> --}}
+          <p>Order note:</p>
+          <textarea rows="2" class="form-control"></textarea>
+        </div>
+      </div>
+      <div class="d-flex gap-3 justify-content-end">
+        <a href="#" class="btn btn-danger">All Clear</a>
+        <a href="/checkout" class="btn btn-success">Proceed To Checkout</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+  {{/if}}
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+<script>
+  const Incqty = async (id) => {
+    try {
+
+      const res = await axios.post(`/Incqty/${id}`, {}).then((e) => {
+        e.data.response
+        document.getElementById(id).value = e.data.response.quantity
+        window.location.reload()
+      })
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+</script>
+
+<script>
+  const Decqty = async (id) => {
+    try {
+
+      const res = await axios.post(`/Decqty/${id}`, {}).then((e) => {
+        e.data.response
+        document.getElementById(id).value = e.data.response.quantity
+        window.location.reload()
+      })
+
+    } catch (err) {
+      console.log(err)
+    }
+  }
+</script>
+
+
+<script>
+    const addToWishlist = async (id) => {
+        const res = await axios.post(`/addToWishlist/${id}`, {}).then((e) => {
+            console.log(e.data)
+            Toastify({
+                text: "Product Added To Wishlist",
+                className: "info",
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }
+            }).showToast();
+        })
+    }
+</script>
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

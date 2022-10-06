@@ -1,0 +1,194 @@
+<section class="auth vh-100">
+
+	<!-- begin::preloader-->
+	<div class="preloader">
+		<div class="preloader-icon"></div>
+	</div>
+	<!-- end::preloader -->
+
+
+	<div class="form-wrapper">
+		<div class="container">
+			<div class="card">
+				<div class="row g-0">
+					<div class="col">
+						<div class="row">
+							<div class="col-md-10 offset-md-1">
+								<div class="ltf-block-logo d-block d-lg-none text-center text-lg-start">
+									<img width="600" src="img/logo.png" alt="logo">
+								</div>
+								<div class="my-5 text-center text-lg-start">
+									<h1 class="display-8">Create Account</h1>
+									<p class="text-muted">You can create a free account now</p>
+								</div>
+								<form class="mb-5" action="signup" method="post" id="signup">
+									<div class="mb-3">
+										<input type="text" class="form-control" placeholder="Enter fullname" autofocus
+											required name="name" id="name">
+									</div>
+									<div class="mb-3">
+										<input type="email" class="form-control" placeholder="Enter email" required
+											name="email" id="email">
+									</div>
+									<div class="mb-3">
+										<input type="mobile" class="form-control" placeholder="Mobile Number" required
+											name="mobile" id="mobile">
+									</div>
+									<div class="mb-3">
+										<input type="text" class="form-control" value="false" hidden placeholder="Enter password"
+											required name="status" id="status">
+										<input type="password" class="form-control" placeholder="Enter password"
+											required name="password" id="password">
+									</div>
+									<div class="mb-3">
+										<input type="password" class="form-control" placeholder="Re-enter password"
+											required name="re_password" id="re_password">
+									</div>
+									<div class="text-center text-lg-start">
+										<button class="btn btn-primary mt-4">Sign Up</button>
+									</div>
+								</form>
+								{{!-- <div class="social-links justify-content-center">
+									<a href="#">
+										<i class="ti-google bg-google"></i> Sign in with Google
+									</a>
+									<a href="#">
+										<i class="ti-facebook bg-facebook"></i> Sign in with Facebook
+									</a>
+								</div> --}}
+								<p class="text-center d-block d-lg-none m-5 mt-lg-0">
+									Don't have an account? <a href="#">Sign In</a>.
+								</p>
+							</div>
+						</div>
+					</div>
+					<div
+						class="col d-none d-lg-flex border-start align-items-center justify-content-between flex-column text-center">
+						<div class="logo">
+							<img width="350" src="img/logo.png" alt="logo">
+						</div>
+						<div>
+							<h3 class="fw-bold">Welcome to Buy-Cycle!</h3>
+							<p class="lead my-5">Do you already have an account?</p>
+							<a href="/login" class="btn btn-primary">Login</a>
+						</div>
+						<ul class="list-inline">
+							<li class="list-inline-item">
+								<a href="#">Privacy Policy</a>
+							</li>
+							<li class="list-inline-item">
+								<a href="#">Terms & Conditions</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+
+</script>
+
+
+
+
+
+
+
+<!-- Jquery Core CDN -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
+
+<!-- Jquery Validation -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/additional-methods.js"></script>
+
+
+
+
+<script>
+	   jQuery.validator.addMethod("lettersonly", function (value, element) {
+        return this.optional(element) || /^[a-z]+$/i.test(value);
+    }, "Letters only please");
+
+    $.validator.addMethod("noCaps", function (value, element) {
+        return this.optional(element) || !/[A-Z]/.test(value);
+    }, "email can't have upper case letters")
+	$(document).ready(function () {
+		$("#signup").validate({
+			rules: {
+				name: {
+					required: true,
+					minlength: 4,
+					maxlength: 15,
+					lettersonly:true
+				},
+				email: {
+					required: true,
+					email: true
+					
+
+				},
+				mobile: {
+					required: true,
+					number: true,
+					minlength: 10,
+					maxlength: 10
+
+				},
+
+				password: {
+					required: true,
+					minlength: 4,
+					maxlength: 10
+
+				},
+				re_password: {
+					required: true,
+					equalTo: '#password'
+
+				}
+			},
+			messages: {
+				name:
+				{
+					required: "Please Enter Your Name",
+					minlength: "Enter Minimum 4 Charachters",
+					maxlength: "Maximum limit of characters is 15",
+					lettersonly: "Use Letters Only"
+				},
+				email: {
+					required: "Please Enter Your  Email",
+					email: "Please Enther a Valid Email Address"
+					
+					
+
+				},
+				mobile: {
+					required: "Enter a valid mobile number",
+					minlength: "10 Numbers Required",
+					maxlength:"10 Number is maximum Limit"
+					
+				},
+
+				password: {
+					required: "Please enter the password",
+					minlength: "Your password Must be at least 5 Characters"
+
+				},
+				re_password: {
+					required: "Please confirm your password",
+					minlength: "Your password Must be at least 5 Characters",
+					equalTo: "Please Enter The Same Password"
+				}
+			}
+
+		})
+	})
+
+
+</script>

@@ -1,0 +1,64 @@
+<div class="table-responsive">
+        <table class="table table-custom table-lg mb-0 ms-2" id="orders">
+            <thead>
+                <tr>
+                    
+                    <th>Order Id</th>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th>Product Name</th>
+                    <th>Payment Method</th>
+                    <th>Payment Status</th>
+                    <th>Total Amount </th>
+
+
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orderDetails}}
+                <tr>
+
+                    <td>
+                        <a href="#">#{{Inc1 @index}}</a>
+                    </td>
+                    <td>{{this.userId.name}}</td>
+                    <td>{{format this.createdAt}}</td>
+
+                    
+                    <td> {{#each this.orderItems}}{{this.product.productname}} <br><br> {{/each}} </td>
+                    
+                  
+                    <td>
+                        <span class="badge bg-primary">{{this.paymentDetails}}</span>
+                    </td>
+                    <td>
+                        <span class="badge bg-primary">{{this.payment}}</span>
+                    </td>
+
+                     
+                    <td>
+                        <span class="badge bg-primary">₹ {{this.totalPrice}}</span>
+                    </td>
+                      <td>
+
+                    <td class="text-end">
+                        <div class="d-flex">
+                            <div class="dropdown ms-auto">
+                                <a href="#" data-bs-toggle="dropdown" class="btn btn-floating" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a href="/admin/Order-details/{{this._id}}" class="dropdown-item">More Details</a>
+                                    {{!-- <a href="#" class="dropdown-item">Cancel</a> --}}
+
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+               {{/each}}
+            </tbody>
+        </table>
+    </div>

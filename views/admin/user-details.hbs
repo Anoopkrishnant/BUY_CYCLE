@@ -1,0 +1,117 @@
+<section>
+    <div class="page-title">
+        <h1> All Users </h1>
+    </div>
+    <div class="container">
+        <table class="table" id="users">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Block/Unblock</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {{#each users}}
+                <tr>
+                    <th>{{Inc1 @index}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.email}}</td>
+                    <td>{{this.mobile}}</td>
+                    {{#if this.status}}
+                    <td style="color: red;">blocked</td>
+                    {{else}}
+                    <td style="color:green;">Active</td>
+                    {{/if}}
+                    <td>
+                        {{#if this.status}}
+                        <a type="button" class="btn btn-success" href="/admin/activate-user/{{this._id}}"
+                            data-bs-toggle="modal{{this._id}}"
+                            onclick="return confirm('Are you sure you want to activate {{this.name}} ?')"
+                            data-bs-target="#exampleModal">Unblock</a>
+                        {{else}}
+                        <a type="button" class="btn btn-danger" href="/admin/block-user/{{this._id}}"
+                            data-bs-toggle="modal{{this._id}}"
+                            onclick="return confirm('Are you sure you want to block {{this.name}} ?')"
+                            data-bs-target="#exampleModal">Block</a> {{/if}}
+
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Button trigger modal -->
+{{!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Block
+</button> --}}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Block User</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Jquery Core CDN -->
+
+
+<!-- CSS -->
+<link rel="stylesheet" href="libs/datatable/datatables.min.css" type="text/css">
+
+<!-- Javascript -->
+<script src="libs/datatable/datatables.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+    $('#users').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'csv', 'pdf', 'print'
+        ]
+    } );
+} );
+</script>
+

@@ -1,0 +1,103 @@
+<section class="product_list mt-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                
+                    <div class="section_tittle text-center">
+                        
+                        <h2>Products<span></span></h2>
+                    </div>
+                    
+         
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="product_list_slider owl-carousel">
+                        <div class="single_product_list_slider">
+                            <div class="row align-items-center justify-content-start">
+
+                                {{#each CategoryProducts}}
+
+                                    <div class="col-lg-3 col-sm-6 mt-4 {{this.categoryname}}">
+                                        <div class="single_product_item roundrd">
+                                            <a href="/product-details/{{this._id}}"><img class="img border border-warning border-2 rounded"
+                                                    src="/productimages/{{this.image.[0]}}" alt=""></a>
+                                            <div class="single_product_text">
+                                                <h4>{{this.productname}}</h4>
+                                                <h3>₹ {{this.price}}</h3>
+                                                <button onclick="addToCart('{{this._id}}')" class="add_cart"
+                                                    style="border-style: none;background-color: white; color:red;">+ ADD TO CART</button>
+                                                {{!-- <a href="/wishlist/{{this._id}}"><span
+                                                        style="margin-left: 40px;"><i class="ti-heart"></i></span></a>
+                                                --}}
+
+                                                <button onclick="wishlist('{{this._id}}')"
+                                                    style="border-style:none;margin-left:4rem;background-color: white;"><span>
+                                                        <i class="ti-heart"></i></span></button>
+
+
+                                                {{#if duplicate}}
+                                                <p>Item already in wishlist</p>
+                                                {{/if}}
+                                                {{!-- <a href="/addToCart/{{this._id}}" class="add_cart">+ add to cart<i
+                                                        class="ti-heart"></i></a> --}}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                              
+                                {{/each}}
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+     function cartcount(){
+        axios({
+            method:'get',
+            url:'/cartcount'
+        }).then((e)=>{
+           
+           
+            document.getElementById('cartcount').innerHTML=e.data
+        })
+    }
+
+    const addToCart = async (id) => {
+        console.log(id)
+        const res = await axios.post(`/addToCart/${id}`, {}).then((e) => {
+            cartcount()
+             Toastify({
+                text: "Product Added To Cart",
+                className: "info",
+                style: {
+                    background: "linear-gradient(to right, #ffcc00 , #ff6600 )",
+                }
+            }).showToast();
+
+        })
+
+    }
+</script>
+
+<script>
+    const wishlist = async (id) => {
+
+        const res = await axios.post(`/wishlist/${id}`, {}).then((e) => {
+              Toastify({
+                text: "Product Added To Wishlist",
+                className: "info",
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }
+            }).showToast();
+        })
+    }
+</script>

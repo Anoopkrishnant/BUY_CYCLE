@@ -1,0 +1,236 @@
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="/userimages/{{userData.image.filename}}"
+                            alt="avatar" class="rounded img-fluid" style="width: 150px;">
+                        <h5 class="my-3">{{userData.name}}</h5>
+                        <p class="text-muted mb-1">{{userData.email}}</p>
+                        <p class="text-muted mb-4">{{userData.address}}</p>
+                        <div class="d-flex justify-content-center mb-2">
+                          <a type="submit" href="/" class="btn btn-primary">home</a>
+                          <a type="submit" href="/add-to-cart" class="btn btn-outline-primary ms-1">cart</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-pills flex-column gap-2">
+                                <li class="nav-item">
+                                    <a class="nav-link  active " href="/user-profile"> My Profile</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " href="./buyer-dashboard.html">My Addresses</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " href="/orders">My Orders </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link " href="/wishlist">Wishlist </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4 ">
+                    <div class="card-body ">
+                        <div class="row d-flex justify-content-center align-content-center">
+                            <div class="row ">
+                                <div>
+                                    <h4>Profile Details</h4>
+                                    <hr>
+
+                                </div>
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Full Name :</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{userData.name}}</p>
+                                    
+                                </div>
+                            </div>
+                            <div class="row pt-3">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Mobile :</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{userData.mobile}}</p>
+                                </div>
+                            </div>
+
+                            <div class="row pt-3">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Email :</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{userData.email}}</p>
+                                </div>
+                            </div>
+
+                            <div class="row pt-3">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Address</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{userData.address}}</p>
+                                </div>
+                            </div>
+
+                            <div class="row pt-3">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Date of Birth :</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{userData.DOB}}</p>
+                                </div>
+                            </div>
+
+                            <div class="row pt-3">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Gender</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{userData.gender}}</p>
+                                </div>
+                            </div>
+
+
+                            <div class="row pt-3">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Location</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{userData.location}}</p>
+                                </div>
+                            </div>
+
+                            <div class="row pt-3 pb-5">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Hint Name</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <p class="text-muted mb-0">{{userData.hintname}}</p>
+                                </div>
+                            </div>
+                            <div class="d-grid col-6 mx-auto ">
+                                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop">
+                                    Edit
+                                </button>
+                             
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="staticBackdropLabel">EDIT PROFILE</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="row g-3 needs-validation" validate action="/editProfile/{{userData._id}}" method="post" enctype="multipart/form-data">
+                
+                    <div class="col-md-6">
+                        <label for="validationCustom01" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" value="{{userData.name}}" name="name" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationCustom02" class="form-label">Mobile</label>
+                        <input type="text" class="form-control" id="mobile" name="mobile" value="{{userData.mobile}}" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationCustomUsername" class="form-label">Email</label>
+                        <div class="input-group has-validation">
+                            {{!-- <span class="input-group-text" id="inputGroupPrepend">@</span> --}}
+                            <input type="email" class="form-control" id="email" name="email" value="{{userData.email}}"
+                                aria-describedby="inputGroupPrepend" required>
+                            <div class="invalid-feedback">
+                                Please Enter a Valid Email
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationCustom03" class="form-label">Address</label>
+                        <input type="text" class="form-control" value="{{userData.address}}" id="address" name="address" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid Address.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationCustom03" class="form-label">D O B</label>
+                        <input type="text" class="form-control" value="{{userData.DOB}}" id="DOB" name="DOB" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationCustom03" class="form-label">Gender</label>
+                        <input type="text" class="form-control" value="{{userData.gender}}" id="gender" name="gender" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="validationCustom05" class="form-label">Location</label>
+                        <input type="text" class="form-control" value="{{userData.location}}" id="location" name="location" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid Location.
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationCustom05" class="form-label">Hint Name</label>
+                        <input type="text" class="form-control" value="{{userData.hintname}}" id="hintname" name="hintname" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid Location.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="formFileMultiple" class="form-label">Image</label>
+                        <input class="form-control form-control-md" type="file"  name="image" value="{{userData.image}}" >
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-danger">Save changes</button>
+                    </div>
+                </form>
+         </div>
+    </div>
+  </div>
+</div>

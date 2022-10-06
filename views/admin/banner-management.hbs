@@ -1,0 +1,141 @@
+<!-- Button trigger modal -->
+<a role="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+    href="">
+    Add Banner
+</a>
+
+<!-- Add Product  Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-header">Add Banner</h5>
+                {{!-- <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5> --}}
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="mx-1 mx-md-4" id="myform1" action="/admin/add-banner" method="post"
+                        enctype="multipart/form-data">
+
+
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="bannername" id="bannername"
+                                placeholder=" productname" />
+                            <label for="floatingInput">Banner Name</label>
+                        </div>
+
+
+                        <div class="form-floating mb-2 mt-2">
+                            <input type="text" class="form-control" name="heading" id="heading" placeholder="Price" />
+                            <label for="floatingInput">Heading</label>
+                        </div>
+
+                        <div class="form-floating mb-2 mt-2">
+                            <input type="text" class="form-control" name="discription" id="discription"
+                                placeholder="Discount Price" />
+                            <label for="floatingInput">Discription</label>
+                        </div>
+
+                        {{!-- <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="status" id="status" placeholder="discription" />
+                            <label for="floatingInput">Status</label>
+                        </div> --}}
+
+                        <label for="formFile" class="form-label">UPLOAD IMAGES</label>
+                        <div class="row ml-auto">
+                            <input class="form-control col-8" type="file" multiple id="image" name="image" />
+                            <img class="col-3" style="width:2rem ;" id="myimg" src="" />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-outline-success">Submit</button>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<!--Table -->
+<div class="content ">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="table-responsive">
+                <table class="table table-custom table-lg mb-0" id="products">
+                    <thead>
+                        <tr>
+                            {{!-- <th>
+                                <input class="form-check-input select-all" type="checkbox"
+                                    data-select-all-target="#products" id="defaultCheck1">
+                            </th> --}}
+                            <th>No</th>
+                            <th>Banner Name</th>
+                            <th>Heading</th>
+                            <th>Discription</th>
+                            <th>Image</th>
+                            <th>Created Date</th>
+                            
+                            <th class="text-end">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each bannerDetails}}
+                        <tr>
+                            {{!-- <td>
+                                <input class="form-check-input" type="checkbox">
+                            </td> --}}
+                             <td>
+                                <a href="#">{{Inc1 @index}}</a>
+                            </td>
+                            <td>{{this.bannername}}</td>
+                            <td>{{this.heading}}</td>
+                            <td>
+                                {{this.discription}}
+                            </td>
+
+                            
+                            <td>
+                                <a href="#">
+                                    <img src="/productimages/{{this.image.[0]}}" class="rounded" width="40" alt="...">
+                                </a>
+                            </td>
+                            <td>
+                                <span class="text ">{{format this.createdAt}}</span>
+                            </td>
+                            <td class="text-end">
+
+                                <div class="d-flex">
+                                    <div class="dropdown ms-auto">
+                                        <a href="#" data-bs-toggle="dropdown" class="btn btn-floating"
+                                            aria-haspopup="true" aria-expanded="false">
+                                            <i class="bi bi-three-dots"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-end">
+                                            <a href="#" class="dropdown-item">Action</a>
+                                            <a href="/admin/update-product/{{this._id}}" class="dropdown-item"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModalUpdate{{this._id}}">Edit</a>
+                                            <a href="/admin/delete-banner/{{this._id}}"
+                                                class="dropdown-item">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                  {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

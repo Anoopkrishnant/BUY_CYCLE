@@ -1,0 +1,139 @@
+
+
+.banner_part{
+  background-image: url(/img/backgound.jpg);
+background-repeat:no-repeat;
+background-size:cover;
+background-position:center;
+}
+.our_offer.section_padding{
+  background-image: url(https://img.wallpapersafari.com/desktop/1680/1050/22/70/ejGqt7.jpg);
+  background-size:cover;
+    background-repeat: no-repeat; 
+    height: 100vh;
+    width: auto;
+  
+  
+}
+.logo{
+  height: 110px;
+  width:380px;
+}
+
+
+.menu-header-logo img {
+  width: 280px;
+  padding-top: 30px;
+  padding-left: 20px;
+}
+
+.dataTables_filter {
+ display: flex;
+ flex-direction: row;
+ justify-content: end;
+ margin-bottom: 50px;
+ margin-right: 50px;
+ font-size:14px;
+ color: orangered;
+  
+}
+.dataTables_filter input {
+  border-radius: 8px;
+  background-color: white;
+  border-color:darkorange;
+  color: orangered;
+  padding: 6px 24px;
+
+   
+ }
+ .dataTables_filter input ::before {
+  content:"Search";
+ }
+
+.dataTables_paginate{
+  padding: 0 10px;
+  display: flex;
+ flex-direction: row;
+ justify-content:space-evenly;
+}
+
+.dataTables_info{
+  text-align: center;
+
+}
+.dt-button.buttons-copy.buttons-html5{
+  transition-duration: 0.4s;
+  border-radius: 8px;
+  background-color: white;
+  border-color: orangered;
+  color: orangered;
+  padding: 6px 24px;
+ 
+}
+.dt-button.buttons-copy.buttons-html5:hover{
+ 
+  background-color: orangered;
+  color:white;
+}
+.dt-button.buttons-csv.buttons-html5{
+  transition-duration: 0.4s;
+  border-radius: 8px;
+  background-color: white;
+  border-color: orangered;
+  color: orangered;
+  padding: 6px 24px;
+ 
+}
+.dt-button.buttons-csv.buttons-html5:hover{
+ 
+  background-color: orangered;
+  color:white;
+    
+    
+}
+
+.dt-button.buttons-excel.buttons-html5{
+  transition-duration: 0.4s;
+  border-radius: 8px;
+  background-color: white;
+  border-color: orangered;
+  color: orangered;
+  padding: 6px 24px;
+  
+}
+ 
+
+.dt-button.buttons-excel.buttons-html5:hover{
+  background-color: orangered;
+  color:white;
+  
+}
+.dt-button.buttons-pdf.buttons-html5{
+  transition-duration: 0.4s;
+  border-radius: 8px;
+  background-color: white;
+  border-color: orangered;
+  color: orangered;
+  padding: 6px 24px;
+ 
+}
+.dt-button.buttons-pdf.buttons-html5:hover{
+ 
+  background-color: orangered;
+  color:white;
+}
+.dt-button.buttons-print{
+  transition-duration: 0.4s;
+  border-radius: 8px;
+  background-color: white;
+  border-color: orangered;
+  color: orangered;
+  padding: 6px 24px;
+ 
+}
+.dt-button.buttons-print:hover{
+ 
+  background-color: orangered;
+  color:white;
+}
+

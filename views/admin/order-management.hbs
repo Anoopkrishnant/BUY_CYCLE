@@ -1,0 +1,219 @@
+<div class="content " style="overflow:hidden;">
+
+    <div class="mb-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    {{!-- <a href="#">
+                        <i class="bi bi-globe2 small me-2"></i> Dashboard
+                    </a> --}}
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <h5>Orders
+                </li>
+            </ol>
+        </nav>
+    </div>
+
+
+
+    <div class="table-responsive">
+        <table class="table table-custom table-lg mb-0 ms-2" id="orders">
+            <thead>
+                <tr>
+                    
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    
+                    <th>Total Amount </th>
+                    <th>Payment
+                        Method</th>
+                    <th>Delivery Status</th>
+                    <th>Payment Status</th>
+                    <th>Change Status</th>
+                    <th>Cancel</th>
+
+
+                    <th class="text-end ">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orderDetails}}
+                <tr>
+
+                    <td>
+                        <a href="#">{{format this.createdAt}}</a>
+                    </td>
+                    <td>{{this.userId.name}}</td>
+                    <td>{{this.userId.email}}</td>
+                    <td>{{this.deliveryDetails.address.city}}</td>
+                  
+                    <td>
+                        ₹ {{this.totalPrice}}
+                    </td>
+                    <td>
+                        <span class="badge bg-primary">{{this.paymentDetails}}</span>
+                    </td>
+
+                     
+                    <td>
+                        <span class="badge bg-primary">{{this.deliveryStatus}}</span>
+                    </td>
+                      <td>
+                       <span class="badge bg-success"> {{this.productStatus}} </span> 
+                        </td>
+                        {{#if (eq this.productStatus "pending")}}
+                        
+                        <td><button  onclick="productShiped('{{this._id}}')" style="border: 0ch;background-color: transparent;" ><i class="bi bi-truck"aria-hidden="true" style="font-size:24px;color:chocolate" ></i></button></td>
+                        {{/if}}
+                        {{#if (eq this.productStatus "shipped")}}
+                        {{!-- <td><a class="btn " href="/admin/productDeliver/{{this._id}}"><i class="fa fa-shopping-bag" aria-hidden="true" style="font-size:24px"></i></a></td> --}}
+                       <td><button   onclick="productDeliverd('{{this._id}}')" style="border: 0ch;background-color: transparent;"><i class="bi bi-bag-check-fill" aria-hidden="true" style="font-size:24px;color:chocolate"></i></button></td>
+                        {{/if}}
+
+                        {{#if (eq this.productStatus "deliverd")}}
+                        <td><i class="bi bi-check-circle-fill" style="font-size:22px;color: green;"></i></td>
+                        {{/if}}
+
+                        {{#if (eq this.productStatus "Cancelled")}}
+                        <td><i class="fa fa-ban" aria-hidden="true"  style="font-size:24px"></td>
+                        {{/if}}
+
+                        {{#if (or (eq this.productStatus "pending")(eq this.productStatus "shipped"))}}
+                        
+                        <td><button class="btn btn-danger" onclick="cancelOrder('{{this._id}}')" style="font-size: 10px;">Cancel</button></td>
+                        </td>
+                        {{/if}}
+
+                        {{#if (eq this.productStatus "deliverd")}}
+                        <td style="color: green;">Delivered</td>
+                        {{/if}}
+
+                        {{#if (eq this.productStatus "Cancelled")}}
+                        <td><i  class="bi bi-x-circle-fill" aria-hidden="true"  style="font-size:24px"></i></td>
+                        {{/if}}
+
+                    <td class="text-end">
+                        <div class="d-flex">
+                            <div class="dropdown ms-auto">
+                                <a href="#" data-bs-toggle="dropdown" class="btn btn-floating" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="bi bi-three-dots"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                    <a href="/admin/Order-details/{{this._id}}" class="dropdown-item">More Details</a>
+                                    {{!-- <a href="#" class="dropdown-item">Cancel</a> --}}
+
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+               {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    {{!-- <nav class="mt-4" aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav> --}}
+
+</div>
+
+<script>
+    $(document).ready(function() {
+    $('#orders').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+</script>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+     async  function productShiped(id){       
+      axios({
+        method:'post',
+        url:'/admin/productShiped/'+id
+      }).then((response)=>{
+        console.log(response,'response')
+        location.reload()
+      }).catch((response)=>{
+        console.log(response)
+      })
+    }
+
+    async function productDeliverd(id){
+       axios({
+        method:'post',
+        url:'/admin/productDeliverd/'+id
+       }).then((response)=>{
+         location.reload()
+       }).catch((response)=>{
+        console.log(response)
+       })
+    }
+
+ 
+    async function cancel(id) {
+
+        axios({
+            method: 'post',
+            url: '/cancelOrder/' + id
+        }).then((response) => {
+
+
+            location.reload()
+
+        }).catch((response) => {
+            console.log(response)
+        })
+    }
+
+    function cancelOrder(id) {
+        swal({
+            title: "Are you sure?",
+            
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    this.cancel(id)
+                    swal("Poof! Order cancelled successfully!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Order is safe!");
+                }
+            });
+    }
+
+</script>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
