@@ -59,10 +59,10 @@
 
                      
                     <td>
-                        <span class="badge bg-primary">{{this.deliveryStatus}}</span>
+                        <span class="badge bg-success">{{this.productStatus}}</span> 
                     </td>
                       <td>
-                       <span class="badge bg-success"> {{this.productStatus}} </span> 
+                       <span class="badge bg-success">{{this.deliveryStatus}} </span> 
                         </td>
                         {{#if (eq this.productStatus "pending")}}
                         
@@ -78,7 +78,7 @@
                         {{/if}}
 
                         {{#if (eq this.productStatus "Cancelled")}}
-                        <td><i class="fa fa-ban" aria-hidden="true"  style="font-size:24px"></td>
+                        <td><i class="bi bi-x" aria-hidden="true"  style="font-size:26px;color:red" ></td>
                         {{/if}}
 
                         {{#if (or (eq this.productStatus "pending")(eq this.productStatus "shipped"))}}
@@ -91,8 +91,8 @@
                         <td style="color: green;">Delivered</td>
                         {{/if}}
 
-                        {{#if (eq this.productStatus "Cancelled")}}
-                        <td><i  class="bi bi-x-circle-fill" aria-hidden="true"  style="font-size:24px"></i></td>
+                        {{#if (eq this.productStatus "Cancelled" )}}
+                        <td><a class="cancel text-danger">Cancelled</a></td>
                         {{/if}}
 
                     <td class="text-end">
@@ -151,7 +151,7 @@
 
 
 
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
@@ -180,10 +180,10 @@
 
  
     async function cancel(id) {
-
+ 
         axios({
             method: 'post',
-            url: '/cancelOrder/' + id
+            url: '/admin/cancelOrder/' + id
         }).then((response) => {
 
 
@@ -195,6 +195,8 @@
     }
 
     function cancelOrder(id) {
+          alert('called')
+       
         swal({
             title: "Are you sure?",
             
@@ -204,7 +206,7 @@
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    this.cancel(id)
+                    cancel(id)
                     swal("Poof! Order cancelled successfully!", {
                         icon: "success",
                     });
@@ -216,4 +218,3 @@
 
 </script>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

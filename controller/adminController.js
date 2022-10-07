@@ -222,9 +222,11 @@ module.exports={
     },
 
     CancelOrder: (orderid) => {
+        console.log(orderid,'id');
         return new Promise(async (resolve, reject) => {
             try {
-                await orderModel.findByIdAndUpdate({ _id: orderid }, { productStatus: "Cancelled" }).then((response) => {
+                await orderModel.findOneAndUpdate({ _id: orderid }, { productStatus: "Cancelled" }).then((response) => {
+                    console.log(response);
                     resolve(response)
                 })
             } catch (error) {

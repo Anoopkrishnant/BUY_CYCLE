@@ -36,7 +36,7 @@ helpers:{
 }}))
 
 // Mongoose Connection
-mongoose.connect('mongodb://localhost:27017/Bicycle').then(()=>{
+mongoose.connect(process.env.DATABASE_URL).then(()=>{
   console.log('DB connected Successfuly')
 }).catch((err)=>{
    console.log('somthing wrong',err)
