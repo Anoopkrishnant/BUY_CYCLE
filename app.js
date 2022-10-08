@@ -7,9 +7,11 @@ const mongoose= require('mongoose');
 let session = require('express-session');
 var hbs = require('express-handlebars');
 const dotenv = require('dotenv')
+
+
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
-const authRouter = require('./routes/auth')
+
 var app = express();
 
 // view engine setup
@@ -49,7 +51,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: "This is a secret_key",resave: true,  saveUninitialized: true, cookie:{maxAge:6000000000 }}));
+app.use(session({secret: "BUY001",resave: true,  saveUninitialized: true, cookie:{maxAge: 1000 * 60 * 60 * 24 }}));
 
 app.use((req,res,next)=>{
   res.set("Cache-Control","no-store");
@@ -58,7 +60,7 @@ app.use((req,res,next)=>{
 
 app.use('/', usersRouter);
 app.use('/admin', adminRouter);
-// app.use('/auth', authRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -7,9 +7,9 @@ module.exports={
     isblocked:(req,res,next)=>{
 
         if(req.session.user){
-            console.log('middle');
+            console.log('middle',req.session.user);
             new Promise(async(resolve,reject)=>{
-                let user=await userModel.findOne({email:req.session.email})
+                let user=await userModel.findOne({email:req.session.user.email})
                 console.log(user,'user');
                 resolve(user)
             }).then((user)=>{

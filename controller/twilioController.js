@@ -4,12 +4,12 @@ const userModel = require('../Model/userModel');
 const dotenv = require('dotenv').config()
 
 config = {
-  serviceID:  process.env.serviceID,
+  serviceSID:  process.env.serviceSID,
   accountSID: process.env.accountSID,
   authToken:  process.env.authToken
 };
 
-const client = require("twilio")(config.accountSID, config.authToken);
+const client = require("twilio")(config.accountSID , config.authToken);
 
 module.exports = {
   // signUpGetOtp: (number) => {
@@ -39,7 +39,7 @@ module.exports = {
                 console.log(user,'available');
 
                 if (!user.ActiveStatus) {
-                    client.verify.v2.services(config.serviceID).verifications.create({
+                    client.verify.v2.services(config.serviceSID).verifications.create({
                         to: '+91' + number,
                         channel: "sms"
                     })

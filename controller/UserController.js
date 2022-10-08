@@ -9,6 +9,7 @@ const productModel = require('../Model/productModel')
 
 module.exports = {
     Dosignup:(userdata) => {
+        console.log(userdata,'user in');
         return new Promise(async (resolve, reject) => {
 
 
@@ -23,7 +24,7 @@ module.exports = {
            userModel.create(userdata).then((data) => {
                 state.userexist =false
                 state.user=userdata
-                console.log(userdata,"function");
+                console.log(userdata,"function",data);
                 console.log('insert');
                 resolve(state)
             })

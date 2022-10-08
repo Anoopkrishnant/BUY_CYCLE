@@ -425,9 +425,11 @@ Helpers = {
                     response.notEmpty = true;
                     response.products = products;
                     resolve(response);
+                    
                 } else {
                     response.notEmpty = false;
                     resolve(response);
+                    
                 }
             } catch (err) {
                 reject(err);
